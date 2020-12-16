@@ -1,9 +1,10 @@
 \documentclass[11pt]{article}
 
-\usepackage[backend=biber, style=authoryear, sorting=nyt, citestyle=authoryear]{biblatex}
+\usepackage{amsmath, mathtools, amsthm, graphicx, float, bm, csquotes}
+
+\usepackage[backend=biber, style=authoryear, sorting=nyt, citestyle=authoryear, doi=false, isbn=false, url=false, eprint=false]{biblatex}
 
 \addbibresource{references.bib}
-\usepackage{amsmath, mathtools, amsthm, graphicx, float, bm, csquotes}
 
 \DeclareMathOperator{\di}{d\!}
 
@@ -18,33 +19,31 @@
 \maketitle
 
 \begin{abstract}
-    This paper concerns the effectiveness of diversity incentives for recruiters. I address whether incentives for recruiters to source diverse candidates are effective in increasing the diversity of the workforce. I first develop a theoretical model --  a 2-stage hiring game in which, recruiters are incentivized to shortlist the best candidates with an additional bonus for diverse candidates, and managers are incentivized to hire the best candidate from the shortlist -- and solve this model under the theory of rational choice under uncertainty. Second, I propose an experiment to test whether the empirics align with the theoretical predictions, and test whether behavioral concerns such as stereotyping countervail the intended effects of diversity incentives.
+    This paper concerns the effectiveness of diversity incentives for recruiters. I address whether incentives for recruiters to source diverse candidates are effective in increasing the diversity of the workforce. I first develop a theoretical model --  a 2-stage hiring game in which, recruiters are incentivized to shortlist the best candidates with an additional bonus for diverse candidates, and managers are incentivized to hire the best candidate from the shortlist with no diversity bonus -- and solve this model under the theory of rational choice under uncertainty. Second, I propose an experiment to test whether the empirics align with the theoretical predictions, and test whether behavioral concerns such as stereotyping countervail the intended effects of diversity incentives.
 \end{abstract}
 
 \section{Introduction}
-Underrepresentation of women and minorities in the STEM labor force has far-reaching social and economic implications from untapped innovative capabilities to economic productivity. Organizations have attempted to address this issue in a multitude of ways: disclosing diversity reports, employing Diversity and Inclusion officers, and instituting policies to increase workforce diversity \parencite{shi_adoption_2018}. One such policy is an incentive scheme for recruiters to source and recruit diverse candidates. According to a Bloomberg article, Facebook implemented a point system in which recruiters get 1 point for every new hire and an additional point if the new hire is diverse \parencite{huet_facebooks_2017}. Recently, however, doubts have been raised about the effectiveness of this policy due to the misalignment of incentives between recruiters and engineers/managers, who ultimately make the hiring decision. Often, managers do not get extra incentives to hire diverse candidates, and often pass on them. The reporter in the Bloomberg article writes:
+Underrepresentation of women and minorities in the STEM labor force has far-reaching social and economic implications from untapped innovative capabilities to economic inequality. Organizations have attempted to address this issue in a multitude of ways: disclosing diversity reports, employing Diversity and Inclusion officers, and instituting policies to increase workforce diversity \parencite{shi_adoption_2018}. One such policy is an incentive scheme for recruiters to source and recruit diverse candidates. According to a Bloomberg article, Facebook implemented a point system in which recruiters get 1 point for every new hire and an additional point if the new hire is diverse \parencite{huet_facebooks_2017}. Recently, however, doubts have been raised about the effectiveness of this policy due to the misalignment of incentives between recruiters and engineers/managers, who ultimately make the hiring decision. Often, managers do not get extra incentives to hire diverse candidates, and often pass on them. The reporter in the article writes:
 \begin{quote}
     The recruiters saw that many of their diversity candidates didn’t end up getting an offer. Two former recruiters blamed in part the engineering department’s candidate review process, a twice- or thrice-weekly meeting at which every engineering offer had to be approved \parencite{huet_facebooks_2017}.
 \end{quote}
 
-Similar phenomena have been pointed out by researchers as well. For example, in a recent research study that examines the effects of founder experience and gender on hire-ablity, a recruiter interviewed by the authors is quoted:
+Similar phenomena have been pointed out by researchers as well. For example, in a recent research study that examines the effects of founder experience and gender on hire-ability, a recruiter interviewed by the authors is quoted:
 
 \begin{quote}
     A technical recruiter at a search firm (Recruiter 16) who noted that “tons of companies come to us because all they want is diversity candidates” also stated that his clients are interviewing a lot of diversity candidates but not hiring them at the same rate \parencite{botelho_founder_2019}.
 
 \end{quote}
 
-This raises an important question of whether policies that incentivize recruiters to recruit diverse candidates are effective in increasing the diversity of the workforce, let alone not be counterproductive. While these policies are aimed to increase workforce diversity by putting more diverse candidates in front of managers, a countervailing effect is also possible: the existence of diversity bonuses may prejudice managers' beliefs about the quality of diverse candidates in a way that they are vastly (and incorrectly) underestimated, countervailing the intended effects of diversity policies. This possibility motivates the research questions of this paper: how effective are diversity incentive policies? Can diversity policies prejudice managers' beliefs about the productivity of diverse candidates? To address these questions, I first develop a theoretical model that models the hiring process as a 2-stage game. I solve this model with the assumptions of rational choice under uncertainty. I finally propose an experiment that tests the effectiveness of diversity incentive policies, and whether such policies prejudice managers' beliefs about the quality of diverse candidates.
+This raises an important question of whether policies that incentivize recruiters to recruit diverse candidates are effective in ultimately increasing the diversity of the workforce, let alone not be counterproductive. While these policies are aimed to increase workforce diversity by putting more diverse candidates in front of managers, a countervailing effect is also possible: the existence of diversity bonuses may prejudice managers' beliefs about the quality of diverse candidates in a way that they are vastly (and incorrectly) underestimated, countervailing the intended effects of diversity policies. This possibility motivates the research questions of this paper: how effective are diversity incentive policies? Can diversity policies prejudice managers' beliefs about the quality of diverse candidates? To address these questions, I first develop a theoretical model that models the hiring process as a 2-stage game. I solve this model with assumptions of rational choice under uncertainty. I finally propose an experiment that tests the effectiveness of diversity incentive policies, and whether such policies prejudice managers' beliefs about the quality of diverse candidates.
 
 \section{Literature}
 
-There are two related strands of literature that are relevant in addressing the research questions at hand -- the economics literature on discrimination and the economics and social psychology literature on affirmative action programs. First, theories of discrimination in economics broadly fall into two categories: taste-based and statistical discrimination. In the labor context, theories of taste-based discrimination posit that an employer discriminates against individuals from certain groups because of the animus the employer has towards these groups -- that is, the employer derives disutility from hiring from certain groups \parencite{becker_economics_1971}. An alternative, but much more widely studied in economics, is the theory of statistical discrimination, wherein an employer who observers a noisy signal of applicants' productivity resorts to group-level averages and variances as proxies, leading to discrimination \parencite{arrow_theory_1973,phelps_statistical_1972,aigner_statistical_1977}. Unlike taste-based models, statistical discrimination assumes no animus on the part of the employer, but is a consequence of rational action. For example, given two applicants from two groups with similar, but noisy signals of productivity, the employer will hire the one from the group with a higher average productivity. Similarly, a risk-averse employer will hire the one from the group with lower variance in productivity \parencite{aigner_statistical_1977}.
-\\
+There are two related strands of literature that are relevant in addressing the research questions at hand -- the economics literature on discrimination and the economics and social psychology literature on affirmative action programs. First, theories of discrimination in economics broadly fall into two categories: taste-based and statistical discrimination. In the labor context, theories of taste-based discrimination posit that an employer discriminates against individuals from certain groups because of the animus the employer has towards these groups -- that is, the employer derives disutility from hiring from certain groups \parencite{becker_economics_1971}. An alternative, but much more widely studied in economics, is the theory of statistical discrimination, wherein an employer who observes a noisy signal of applicants' productivity resorts to group-level averages and variances as proxies, leading to discrimination \parencite{arrow_theory_1973,phelps_statistical_1972,aigner_statistical_1977}. Unlike taste-based models, statistical discrimination assumes no animus on the part of the employer, but is a consequence of rational action. For example, given two applicants from two groups with similar, but noisy signals of productivity, the employer will hire the one from the group with higher average productivity. Similarly, a risk-averse employer will hire the one from the group with lower variance in productivity \parencite{aigner_statistical_1977}.
 
-Dozens of studies have documented statistical and taste-based discrimination in labor market settings (See \cite{bertrand_chapter_2017,anderson_discrimination_2005,guryan_tastebased_2013} for a review). Some of these studies show how discrimination can arise even when populations are identical. Of particular relevance is a study by Davis, in which the author argues that if employers make inferences about group productivity from the maximum observation of productivity in the group, rather than average observation (for example, employers may remember the best candidate they hired more rather than they remember the average candidate), then the smaller group may be perceived as inferior -- since, the expected value of the maximum value is directly related to the number of observations in a group \parencite{davis_maximal_1987}. This nuanced distinction of discrimination based on incorrect beliefs has received attention in recent years. \citeauthor{bohren_inaccurate_2019}, for example, have articulated this distinction and called for a third type of discrimination -- inaccurate statistical discrimination -- for cases in which employers statistically discriminate based on their beliefs, but the beliefs themselves are inaccurate. This is precisely the countervailing effect pointed out at the beginning of this paper -- the presence of diversity incentives may dispose managers to vastly underestimate the productivity of diverse candidates -- more so than what is statistically warranted. The literature on affirmative action programs gives some insights into the mechanism behind this.
-\\
+Dozens of studies have documented statistical and taste-based discrimination in labor market settings (See \cite{bertrand_chapter_2017,anderson_discrimination_2005,guryan_tastebased_2013} for a review). Some of these studies show how discrimination can arise even when populations are identical. Of particular relevance is a study by Davis, in which the author argues that if employers make inferences about group productivity from the maximum observation of productivity in the group, rather than average observation (for example, employers may remember the best candidate they hired more rather than they remember the average candidate), then the smaller group may be perceived as inferior -- since, the expected value of the maximum value is directly related to the number of observations in a group \parencite{davis_maximal_1987}. This nuanced distinction of discrimination based on incorrect beliefs has received attention in recent years. \citeauthor{bohren_inaccurate_2019}, for example, have articulated this distinction and called for a third type of discrimination -- inaccurate statistical discrimination -- for cases in which employers statistically discriminate based on their beliefs, but the beliefs themselves are inaccurate \parencite{bohren_inaccurate_2019}. This is precisely the countervailing effect pointed out at the beginning of this paper -- the presence of diversity incentives may dispose managers to vastly underestimate the productivity of diverse candidates -- more so than what is statistically warranted. The literature on affirmative action programs gives some insights into the mechanism behind this.
 
-While studies have documented positive aspects of affirmative action policies (AAPs) -- such as increased effort levels, overall output, increased diversity \parencite{schotter_asymmetric_1992,balafoutas_affirmative_2012,niederle_how_2012}, a number of studies have also pointed out its negative impacts. It is widely documented that in the presence of AAPs, majority groups stigmatize AAP hires and view them as less competent \parencite{leslie_stigma_2013,heilman_affirmative_1997,petters_negative_2020}. These negative views are extended to other members of affirmed groups even if they are not hired under AAPs. Furthermore, AAP hires and minorities may view themselves as less competent due to stereotype threat, which in turn affects performance, creating a vicious cycle \parencite{leslie_stigma_2013}. While these studies give insights into mechanisms and outcomes of AAPs in general, a fundamental limitation (at least with respect to the diversity incentive policy described in this paper) is that these policies are exogenously imposed. To my knowledge, none of the studies sufficiently capture the incentive misalignment between the recruiter and the manager, further motivating this study.
+While studies have documented positive aspects of affirmative action policies (AAPs) -- such as increased effort levels, increased overall output, increased diversity \parencite{schotter_asymmetric_1992,balafoutas_affirmative_2012,niederle_how_2012}, a number of studies have also pointed out its negative impacts. It is widely documented that in the presence of AAPs, majority groups stigmatize AAP hires and view them as less competent \parencite{leslie_stigma_2013,heilman_affirmative_1997,petters_negative_2020}. These negative views are extended to other members of affirmed groups even if they are not hired under AAPs. Furthermore, AAP hires and minorities may view themselves as less competent due to stereotype threat, which in turn affects performance, creating a vicious cycle \parencite{leslie_stigma_2013}. While these studies give insights into mechanisms and outcomes of AAPs in general, a fundamental limitation (at least with respect to the diversity incentive policy described in this paper) is that these policies are exogenously imposed. To my knowledge, none of the studies sufficiently capture the incentive misalignment between the recruiter and the manager, further motivating this study.
 
 
 \section{Theoretical Model and Predictions}
@@ -52,7 +51,7 @@ While studies have documented positive aspects of affirmative action policies (A
 \subsection{Model}
 
 To formalize the diversity incentive policy described above, I develop a simple model that models the hiring process as a 2-stage game.
-In the first stage, the recruiter receives applications from $n_a$ candidates, of which $n_m$ are male and $n_f$ are female. Each candidate has productivity $q$, which is a random variable drawn from a distribution with cumulative distribution function $F_q(\cdot)$ and density function $f_q(\cdot)$. Even though the recruiter doesn't observe the true productivity $q$, he\footnote{I will use the pronouns ``he'' and ``she'' to refer to the recruiter and the hiring manager respectively.} observes a noisy signal of productivity, $\hat{q_r}$, which is correlated with the true productivity -- this is akin to recruiters inferring applicants' productivity from resumes, for example.
+In the first stage, the recruiter receives applications from $n_a$ applicants, of which $n_m$ are male and $n_f$ are female. Each candidate has productivity $q$, which is a random variable drawn from a distribution with cumulative distribution function $F_q(\cdot)$ and density function $f_q(\cdot)$. Even though the recruiter doesn't observe the true productivity $q$, he\footnote{I will use the pronouns ``he'' and ``she'' to refer to the recruiter and the hiring manager respectively.} observes a noisy signal of productivity, $\hat{q_r}$, which is correlated with the true productivity -- this is akin to recruiters inferring applicants' productivity from resumes, for example.
 The recruiter's task is to shortlist $n_s$ candidates to send to the manager. He receives a payout that is proportional to the productivity of the candidate hired by the manager ($c_rq$), and receives an additional diversity bonus, if the hired candidate is female ($c_rq + bq$). Formally, the recruiter's utility function is:
 
 \[  U_r =
@@ -73,7 +72,7 @@ In this section, I simplify the above model by fixing some parameters, and solve
 Assume that the true productivity of both male and female candidates are identically distributed under $\textit{Unif}[0,1]$, and that this is common knowledge.
 The recruiter's task is to send 2 candidates to the manager. However, for mathematical tractability, instead of shortlisting 2 candidates in the same round, the recruiter shortlists 2 candidates in 2 sub-rounds -- that is, he shortlists 1 candidate in the first round and shortlists another in the subsequent round. The manager receives 2 candidates in total (from 2 sub-rounds), and her task is to hire 1 candidate.
 
-Without loss of generality, further assume that the recruiter's and manager's commissions are both 1, $c_r=c_h=1$. For brevity, redefine $b$ so that $b \geq 1$. That is, Instead of writing $U_{r,f} = (1+b)q, b \geq 0$  define $U_{r,f} = bq, b \geq 1$.
+Without loss of generality, further assume that the recruiter's and manager's commissions are both 1, $c_r=c_h=1$. For brevity, redefine $b$ so that $b \geq 1$. Instead of writing $U_{r,f} = (1+b)q, b \geq 0$  define $U_{r,f} = bq, b \geq 1$.
 
 \begin{align*}
      & q \sim \textit{Unif}[0,1] \\
@@ -85,12 +84,12 @@ Without loss of generality, further assume that the recruiter's and manager's co
      & U_h = q
 \end{align*}
 
-In each round, given there are $n_m$ male and $n_f$ female candidates in a set of applicants $\bm{a}=\{m_1, m_2, f_3...f_{n_m+n_f}\}$, with corresponding productivities $\{q_1...q_{n_m+n_f}\}$, recruiter's utilities $\{U_1...U_{n_m+n_f})\}$. The recruiter will shortlist a candidate that will maximize his expected utility -- Note that this utility is a function of the candidate's productivity, gender of the candidate, as well as the diversity bonus.
-$$S \equiv \max_k U_r(q, b, \textit{gender})$$
+In each round, given there are $n_m$ male and $n_f$ female candidates in a set of applicants $\bm{a}=\{m_1, m_2, f_3...f_{n_m+n_f}\}$, with corresponding productivities $\{q_1...q_{n_m+n_f}\}$, and recruiter's utilities $\{U_1...U_{n_m+n_f}\}$, the recruiter will shortlist a candidate that will maximize his expected utility. Since the manager has to hire a candidate, the recruiter's optimal strategy is to shortlist the candidate with the highest utility in each round. Note that this utility is a function of the candidate's productivity, gender of the candidate, as well as the diversity bonus.
+$$S \equiv \max_{\bm{a}} U_r(q, b, \textit{gender})$$
 
-Likewise, given a set of shortlisted candidates $\bm{s}=\{m_1...f_{n_s}\}$ manager will hire a candidate that maximizes her own expected utility, which is only a function of the candidate's productivity.
+Likewise, given a set of shortlisted candidates $\bm{s}=\{m_1...f_{n_s}\}$, the manager will hire a candidate that maximizes her own expected utility, which is only a function of the candidate's productivity.
 
-$$\max_l U_h(q)$$
+$$\max_{\bm{s}} U_h(q)$$
 
 \begin{table}
     \caption{Table of Notations}
@@ -121,14 +120,14 @@ $$\max_l U_h(q)$$
 
 
 \begin{proposition}
-    The probability that a male is shortlisted decreases with diversity bonus $b$.
+    The probability that a male (female) is shortlisted decreases (increases) with diversity bonus $b$.
 \end{proposition}
 
 \begin{proof}
     Given the productivies of male and female candidates are uniformly distributed, the recruiter's utility from male and female candidates are also uniformly distributed:
     \begin{align*}
-         & U_{r,m} \sim \Unif \\
-         & U_{r,f} \sim \Unif
+         & U_{r,m} \sim \Unif              \\
+         & U_{r,f} \sim \textit{Unif}[0,b]
     \end{align*}
 
     Let $S_m$ and $S_f$ be the maximum utility to be gained from male and female candidate respectively:
@@ -166,7 +165,7 @@ $$\max_l U_h(q)$$
     The expected productivity of a shortlisted male candidate is independent of diversity bonus $b$.
 \end{proposition}
 \begin{proof}
-    Consider the conditional density function of the recruiter's utility from a male candidate that is shortlisted --  $f_{S_m|S_m>S_y}$. This conditional density function can be written as:
+    Consider the conditional density function of the recruiter's utility from a male candidate that is shortlisted,  $f_{S_m|S_m>S_y}$. This conditional density function can be written as:
 
     \begin{align*}
         f_{S_m|S_m>S_f}(x) & = \frac{f_{S_m}(x)F_{S_f}(x) }{Pr(S_m > S_f)}     \\
@@ -189,7 +188,7 @@ $$\max_l U_h(q)$$
 
 
 \begin{proposition}\label{prop_female_exp_qual}
-    The expected productivity of shortlisted female candidates decreases with bonus $b$
+    The expected productivity of a shortlisted female candidate decreases with diversity bonus $b$.
 \end{proposition}
 \begin{proof}
     Following the above proof, the conditional density function of the recruiter's utility of a shortlisted female candidate is
@@ -202,7 +201,7 @@ $$\max_l U_h(q)$$
         \end{cases}
     \end{align*}
 
-    The expectation of the recruiter's utility from a shortflisted female candidate is:
+    The expectation of the recruiter's utility from a shortlisted female candidate is:
 
     \begin{align*}
         E[S_f|S_f > S_m] & = \int_0^1{x \frac{ n_f(n_f+n_m)x^{(n_f-1)}x^{n_m}}{-n_m+b^{n_f}(n_f+n_m)} \di x}                 \\
@@ -226,7 +225,7 @@ $$\max_l U_h(q)$$
 \end{proof}
 
 \begin{proposition}
-    Given a shortlist of a male and a female $\bm{s} = \{m,f\}$, the probability that a male is hired increases with diversity bonus $b$, and the probability that a female is hired decreases with diversity bonus $b$.
+    Given a shortlist containing 1 male and 1 female candidate $\bm{s} = \{m,f\}$, the probability that a male (female) is hired increases (decreases) with diversity bonus $b$.
 \end{proposition}
 
 \begin{proof}
@@ -280,7 +279,7 @@ $$\max_l U_h(q)$$
 
 
 \begin{proposition}
-    The overall probability that a male is hired decreases with diversity bonus $b$, and the overall probability that a female is hired increases with diversity bonus $b$.
+    The overall probability that a male (female) is hired decreases (increases) with diversity bonus $b$.
 \end{proposition}
 
 \begin{proof}
@@ -304,7 +303,6 @@ $$\max_l U_h(q)$$
                       & = \frac{n_m b^{-3 n_f-n_m} \left(-n_m (2 n_f+n_m) b^{n_f+n_m}+2 (n_f+n_m)^2 b^{2 n_f+n_m}+n_f n_m\right)}{(n_f+n_m)^2 (2 n_f+n_m)}
     \end{align*}
 
-
     Taking the derivative of the above expression with respect to $b$:
 
     \begin{align*}
@@ -323,14 +321,14 @@ $$\max_l U_h(q)$$
 
 \subsection{Inaccurate Beliefs}
 
-A fundamental assumption in rational choice theory is that the manager's (and recruiter's) beliefs about the productivity of shortlisted candidates are independent of diversity bonus $b$ -- that is $\hat{q}_r$ and $\hat{q}_m$ are independent of $b$. Of course, as discussed before, psychological biases and stereotyping brings this into assumption question. The presence of diversity bonus may prejudice managers' beliefs about the productivity of diverse candidates leading them to vastly underestimate their productivity. Furthermore, recruiters may learn this over time, and adjust their behavior accordingly.  Part of the experiment proposed in the following section tests whether this is the case.
+A fundamental assumption in rational choice theory is that the manager's (and recruiter's) beliefs about the productivity of shortlisted candidates are independent of diversity bonus $b$ -- that is $\hat{q}_r$ and $\hat{q}_m$ are independent of $b$, controlling for true productivity $q$. Of course, as discussed before, psychological biases and stereotyping brings this assumption into question. The presence of diversity bonus may prejudice managers' beliefs about the productivity of diverse candidates leading them to vastly underestimate their productivity.  Part of the experiment proposed in the following section tests whether this is the case.
 
 \section{Experimental Setup}
 
-The experiments are aimed to closely mirror the theoretical model described in section 2. Participants are recruited and seperated into two groups -- recruiters and hiring managers. Each recruiter is matched with a hiring manager, and they play 10 rounds total (10 total hires) before the participants are rematched.  Note that this is a between-subject design -- once a participant is assigned to a treatment cell, it will not change throughout the experiment. Managers and recruiters are informed of their own payment structure, as well as their counterparty's payment structure. In addition, both the managers and recruiters receive the full set of instructions, so everything below is common knowledge.
+The experiments are aimed to closely mirror the theoretical model described in section 2. Participants are recruited and separated into two groups -- recruiters and hiring managers. Each recruiter is matched with a hiring manager, and they play a hiring game in which they hire a candidate together. They play 10 rounds total (10 total hires) before the participants are rematched.  Note that this is a between-subject design -- once a participant is assigned to a treatment cell, it will not change throughout the experiment. Managers and recruiters are informed of their own payment structure, as well as their counterparty's payment structure. In addition, both the managers and recruiters receive the full set of instructions, so everything below is common knowledge.
 \\
 
-In each round, each recruiter receives 4 resumes (3 male, 1 female candidate)\footnotemark, which contains the candidate's name, GPA, Degree, Field of Study, and Years of Experience. The gender of the candidate is made salient by the name. Recruiters are asked to assess each candidate's productivity and shortlist 1 or 2 candidates for a fictional software engineering job. They are further informed that the true productivity $q$ of the candidate is composed of two components: first, a deterministic productivity score $q'$ that depends on the candidate's credentials (GPA, Degree, Field of Study, Yrs of Experience). They are shown a schema for how productivity score $q'$ is related to credentials as well as some examples. In general, higher the GPA, Yrs of Experience, and Degree, and more technical the field of study, the higher the score. Second, there is a random error term $\delta$, that is added to the score. This implies that in some cases, even if a candidate has stellar credentials, their true productivity may be less than stellar; but in general, better credentials mean higher productivity. Recruiters are informed that the distribution of productivity among male and female candidates is the same in the initial candidate pool -- that is, on average, a male candidate has the same productivity as a female candidate.
+In each round, each recruiter receives 4 resumes (3 male, 1 female candidate)\footnotemark, which contains the candidate's name, GPA, Degree, Field of Study, and Years of Experience. The gender of the candidate is made salient by the name. Recruiters are asked to assess each candidate's productivity and shortlist 1 or 2 candidates for a fictional software engineering job. They are further informed that the true productivity $q$ of the candidate is composed of two components: first, a deterministic productivity score $q'$ that depends on the candidate's credentials (GPA, Degree, Field of Study, Yrs of Experience). They are shown a schema for how productivity score $q'$ is related to credentials as well as some examples. In general, the higher the GPA, Yrs of Experience, and Degree, and more technical the field of study, the higher the score. Second, there is a random error term $\delta$, that is added to the score. This implies that in some cases, even if a candidate has stellar credentials, their true productivity may be less than stellar; but in general, better credentials mean higher productivity. Recruiters are informed that the distribution of productivity among male and female candidates is the same in the initial candidate pool -- that is, on average, a male candidate has the same productivity as a female candidate.
 
 
 $$q = 0.7q' + 0.3\delta$$
@@ -346,7 +344,7 @@ $$q' = f(\textit{GPA, Degree, Field of Study, Yrs Exp})$$
     \label{sample_resumes}
 \end{figure}
 
-Once a recruiter shortlists 2 candidates, the manager receives the resumes of the shortlisted candidates. The managers are asked to assess each candidate's productivity and hire one candidate. Once the manager hires a candidate, the true productivity of the hired candidate is revealed to both the recruiter and the manager, and both receive a payout based on the candidate's true productivity.
+Once a recruiter shortlists 2 candidates, the manager receives the resumes of the shortlisted candidates. The manager is asked to assess each candidate's productivity and hire one candidate. Once the manager hires a candidate, the true productivity of the hired candidate is revealed to both the recruiter and the manager, and both receive a payout based on the candidate's true productivity.
 
 \subsubsection*{Eliciting Beliefs about Candidate Productivity}
 
@@ -354,7 +352,7 @@ In each round, for each candidate, participants are also asked to record their b
 
 \subsubsection*{An Alternative Setup}
 
-An alternative setup that abstracts away from the hiring context (and predisposed beliefs about gendered nature of software engineering jobs) is to have ``recruiters'' and ``managers'' assess the angle of different colored vertices. In this setup, the angle corresponds to the productivity score of the candidate, and the colors correspond to the gender. This greatly reduces the complexity of the task, but comes at the cost of external validity.
+An alternative setup that abstracts away from the hiring context (and predisposed beliefs about the gendered nature of software engineering jobs) is to have ``recruiters'' and ``managers'' assess the angle of different colored vertices. In this setup, the angle corresponds to the productivity score of the candidate, and the colors correspond to the gender. This greatly reduces the complexity of the task, but comes at the cost of external validity.
 
 \begin{figure}[H] % not "pt"
     \centering
@@ -365,9 +363,9 @@ An alternative setup that abstracts away from the hiring context (and predispose
 
 \subsection{Experimental Variables and Parameters}
 
-The main variable of interest is diversity bonus, which will be varied at the following values: no diversity bonus $b=1$, which serves as the control; 50\% diversity bonus $b=1.5$ (Treatment 1), and 100\% diversity bonus $b=1$ (Treatment 2). With $b=1.5, n_m=3, n_f=1$, there is a 50\% chance that a male candidate is shortlisted. This will ensure that the manager sees roughly an equal number of male and female candidates.
+The main variable of interest is diversity bonus, which will be varied at the following levels: no diversity bonus $b=1$, which serves as the control; 50\% diversity bonus $b=1.5$ (Treatment 1), and 100\% diversity bonus $b=1$ (Treatment 2). With $b=1.5, n_m=3, n_f=1$, there is a 50\% chance that a male candidate is shortlisted. This will ensure that the manager sees roughly an equal number of male and female candidates.
 
-In the theoretical model, recruiters are assumed to shortlist 2 candidates in 2 seperate sub-rounds. Although this assumption makes the model tractable, it may be too contrived. To address this, an alternate setup is also tested, in which recruiters shortlist 2 candidates in the same round. This is to check whether the empirical results deviate between the two setups.
+In the theoretical model, recruiters are assumed to shortlist 2 candidates in 2 separate sub-rounds. Although this assumption makes the model tractable, it may be too contrived. To address this, an alternate setup is also tested, in which recruiters shortlist 2 candidates in the same round. This is to check whether the empirical results deviate between the two setups.
 
 If resources permit, the proportion of male to female candidates in the initial pool can also be varied.
 
@@ -395,12 +393,12 @@ $$q_i'= f(\textit{GPA}_i, \textit{Degree}_i, \textit{FieldofStudy}_i, \textit{Yr
 $$\delta_i = \frac{1}{1+ exp(-\mathcal{N}(q'_i, 1))}$$
 $$q \sim \Unif$$
 
-\subsection{Specification Estimation}
+\subsection{Specification and Estimation}
 
 The first set of analyses compares estimates of (1) Probability that a male is shortlisted, (2) Expected productivity of shortlisted males, (3) Expected productivity of shortlisted females, and (4) Probability that a male is hired, with their theoretical predictions. This involves a simple difference-in-means estimation.
 
 Next, to test whether the presence of diversity bonus prejudices manager's beliefs about the productivity of diverse candidates, the following regression equation is estimated for each gender separately. Under rational choice, we expect $\beta_2$ and $\beta_3$ to be 0.
-$$\hat{q}_{h,i} = \beta_0 + \beta_1 \hat{q}_{r,i} + \beta_2 b + \beta_3 \hat{q}_{r,i} b + \epsilon_i$$
+$$\hat{q}_{h,i} = \beta_0 + \beta_1q_i + \beta_2 b + \beta_3 q_i b + \epsilon_i$$
 
 \subsection{Extensions}
 
@@ -408,6 +406,7 @@ If resources permit, an interesting extension to the experiment is to introduce 
 
 \printbibliography
 
+\newpage
 \section*{Appendix}
 
 \subsection*{A: Theoretical Predictions}
@@ -436,7 +435,7 @@ The following plots show the predicted probability of being shortlisted and hire
 
 \begin{figure}[H] % not "pt"
     \centering
-    \caption{Expected utility of a shortlisted candidate}
+    \caption{Expected productivity of a shortlisted candidate}
     \includegraphics[width=\textwidth, keepaspectratio]{plots/expected_quality_shortlist.png}
 \end{figure}
 

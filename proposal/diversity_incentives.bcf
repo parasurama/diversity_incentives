@@ -1976,24 +1976,27 @@
   </bcf:bibdata>
   <bcf:section number="0">
     <bcf:citekey order="1">shi_adoption_2018</bcf:citekey>
-    <bcf:citekey order="2">botelho_founder_2019</bcf:citekey>
-    <bcf:citekey order="3">becker_economics_1971</bcf:citekey>
-    <bcf:citekey order="4">arrow_theory_1973</bcf:citekey>
-    <bcf:citekey order="4">phelps_statistical_1972</bcf:citekey>
-    <bcf:citekey order="4">aigner_statistical_1977</bcf:citekey>
-    <bcf:citekey order="5">aigner_statistical_1977</bcf:citekey>
-    <bcf:citekey order="6">bertrand_chapter_2017</bcf:citekey>
-    <bcf:citekey order="6">anderson_discrimination_2005</bcf:citekey>
-    <bcf:citekey order="6">guryan_tastebased_2013</bcf:citekey>
-    <bcf:citekey order="7">davis_maximal_1987</bcf:citekey>
-    <bcf:citekey order="8">bohren_inaccurate_2019</bcf:citekey>
-    <bcf:citekey order="9">schotter_asymmetric_1992</bcf:citekey>
-    <bcf:citekey order="9">balafoutas_affirmative_2012</bcf:citekey>
-    <bcf:citekey order="9">niederle_how_2012</bcf:citekey>
-    <bcf:citekey order="10">leslie_stigma_2013</bcf:citekey>
-    <bcf:citekey order="10">heilman_affirmative_1997</bcf:citekey>
-    <bcf:citekey order="10">petters_negative_2020</bcf:citekey>
-    <bcf:citekey order="11">leslie_stigma_2013</bcf:citekey>
+    <bcf:citekey order="2">huet_facebooks_2017</bcf:citekey>
+    <bcf:citekey order="3">huet_facebooks_2017</bcf:citekey>
+    <bcf:citekey order="4">botelho_founder_2019</bcf:citekey>
+    <bcf:citekey order="5">becker_economics_1971</bcf:citekey>
+    <bcf:citekey order="6">arrow_theory_1973</bcf:citekey>
+    <bcf:citekey order="6">phelps_statistical_1972</bcf:citekey>
+    <bcf:citekey order="6">aigner_statistical_1977</bcf:citekey>
+    <bcf:citekey order="7">aigner_statistical_1977</bcf:citekey>
+    <bcf:citekey order="8">bertrand_chapter_2017</bcf:citekey>
+    <bcf:citekey order="8">anderson_discrimination_2005</bcf:citekey>
+    <bcf:citekey order="8">guryan_tastebased_2013</bcf:citekey>
+    <bcf:citekey order="9">davis_maximal_1987</bcf:citekey>
+    <bcf:citekey order="10">bohren_inaccurate_2019</bcf:citekey>
+    <bcf:citekey order="11">bohren_inaccurate_2019</bcf:citekey>
+    <bcf:citekey order="12">schotter_asymmetric_1992</bcf:citekey>
+    <bcf:citekey order="12">balafoutas_affirmative_2012</bcf:citekey>
+    <bcf:citekey order="12">niederle_how_2012</bcf:citekey>
+    <bcf:citekey order="13">leslie_stigma_2013</bcf:citekey>
+    <bcf:citekey order="13">heilman_affirmative_1997</bcf:citekey>
+    <bcf:citekey order="13">petters_negative_2020</bcf:citekey>
+    <bcf:citekey order="14">leslie_stigma_2013</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">

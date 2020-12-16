@@ -12,6 +12,7 @@ import seaborn as sns
 from scipy.special import beta
 import scipy.stats as st
 
+sns.set_style("ticks")
 T_TRIALS = 100000
 
 
@@ -87,11 +88,46 @@ def get_hiring_simulation_metrics(n_males, n_females, n_to_be_shortlisted, b):
 # theoretical predictions
 
 def prob_male_shortlisted(nm, nf, b):
+    """
+    theoretical prob that male is hired
+    :param nm:
+    :type nm:
+    :param nf:
+    :type nf:
+    :param b:
+    :type b:
+    :return:
+    :rtype:
+    """
     return (b ** (-nf) * nm)/(nf+nm)
 
 
-def prob_male_hired(nm, nf, b):
+def cond_prob_male_hired(nm, nf, b):
+    """
+    conditional prob that male is hired given a shortlist of male, female
+    :param nm:
+    :type nm:
+    :param nf:
+    :type nf:
+    :param b:
+    :type b:
+    :return:
+    :rtype:
+    """
     return (b ** (-nf - nm) * (nf * nm + 2 * b ** (2 * nf + nm) * (nf + nm) ** 2 - 2 * b ** (nf + nm) * nm * (2 * nf + nm))) / (2. * (2 * nf + nm) * (-nm + b ** nf * (nf + nm)))
+
+
+def total_probability_male_hired(nm, nf, b):
+    pr_male_sl = prob_male_shortlisted(nm, nf, b)
+
+    pr_n_male_sl = st.binom(n=2, p=pr_male_sl)
+
+    pr_zero_male_sl = pr_n_male_sl.pmf(0)
+    pr_one_male_sl = pr_n_male_sl.pmf(1)
+    pr_two_male_sl = pr_n_male_sl.pmf(2)
+
+    pred_prob_male_hired = pr_zero_male_sl * 0 + pr_one_male_sl * cond_prob_male_hired(nm, nf, b) + pr_two_male_sl * 1
+    return pred_prob_male_hired
 
 
 def pdfUtilShortlistF(x, nm, nf, b):
@@ -127,13 +163,46 @@ class RVQualSLM(st.rv_continuous):
 
 
 def expUtilShortlistF(nm, nf, b):
+    """
+    expected utility of a shortlisted female
+    :param nm:
+    :type nm:
+    :param nf:
+    :type nf:
+    :param b:
+    :type b:
+    :return:
+    :rtype:
+    """
     return (nf * (nf + nm) * (-nm + b ** (1 + nf) * (1 + nf + nm))) / ((1 + nf) * (1 + nf + nm) * (-nm + b ** nf * (nf + nm)))
 
 
 def expQualShortlistF(nm, nf, b):
+    """
+    expected quality of shortlisted female
+    :param nm:
+    :type nm:
+    :param nf:
+    :type nf:
+    :param b:
+    :type b:
+    :return:
+    :rtype:
+    """
     return expUtilShortlistF(nm, nf, b)/b
 
 def expQualShortlistM(nm, nf, b):
+    """
+    expected quality of shortlisted male
+    :param nm:
+    :type nm:
+    :param nf:
+    :type nf:
+    :param b:
+    :type b:
+    :return:
+    :rtype:
+    """
     return (nf+nm)/(1+nf+nm)
 
 
@@ -154,9 +223,22 @@ dfp['pdfQualShortlistM'] = dfp['x'].apply(lambda x: pdfUtilShortlistM(x=x, nm=N_
 female_qual_rvs = RVQualSLF(a=0, b=1).rvs(size=10000)
 male_qual_rvs = RVQualSLM(a=0, b=1).rvs(size=10000)
 
+
+
 # probability of male is shortlisted
 print(df['m'].mean())
 print(prob_male_shortlisted(N_M, N_F, B))
+
+# probability of shortlist as a function of bonus
+dfb = pd.DataFrame({'b': np.linspace(1,3, 1000)})
+dfb['male'] = dfb['b'].apply(lambda x: prob_male_shortlisted(nm=N_M, nf=N_F, b=x))
+dfb['female'] = 1-dfb['male']
+
+sns.lineplot(x='b', y='Probability of being shortlisted', hue='gender',
+             data=dfb.melt('b', value_name="Probability of being shortlisted", var_name="gender"))
+sns.despine()
+plt.show()
+
 
 # expected util of shortlisted female
 print(df[df['m'] == 0]['u'].mean())
@@ -170,6 +252,15 @@ print(expQualShortlistF(N_M, N_F, B))
 print(df[df['m'] == 1]['q'].mean())
 print(expQualShortlistM(N_M, N_F, B))
 
+# expected quality as a function of bonus
+dfb = pd.DataFrame({'b': np.linspace(1,3, 1000)})
+dfb['male'] = dfb['b'].apply(lambda x: expQualShortlistM(N_M, N_F, x))
+dfb['female'] = dfb['b'].apply(lambda x: expQualShortlistF(N_M, N_F, x))
+
+sns.lineplot(x='b', y='Expected quality of shortlisted candidate', hue='gender',
+             data=dfb.melt('b', value_name="Expected quality of shortlisted candidate", var_name="gender"))
+sns.despine()
+plt.show()
 
 # density of util of shortlisted female
 sns.distplot(df[df['m'] == 0]['u'])
@@ -199,17 +290,27 @@ sns.lineplot(x='x', y='value', hue='variable', data=dfpq)
 plt.show()
 
 
+# conditional prob of male hire
+dfb = pd.DataFrame({'b': np.linspace(1,3, 1000)})
+dfb['male'] = dfb['b'].apply(lambda x: cond_prob_male_hired(N_M, N_F, x))
+dfb['female'] = 1-dfb['male']
+
+sns.lineplot(x='b', y='Conditional probability of being hired', hue='gender',
+             data=dfb.melt('b', value_name="Conditional probability of being hired", var_name="gender"))
+sns.despine()
+plt.show()
+
 # prob of male hired
-pr_male_sl = prob_male_shortlisted(N_M, N_F, B)
-
-pr_n_male_sl = st.binom(n=2, p=pr_male_sl)
-
-pr_zero_male_sl = pr_n_male_sl.pmf(0)
-pr_one_male_sl = pr_n_male_sl.pmf(1)
-pr_two_male_sl = pr_n_male_sl.pmf(2)
-
-pred_prob_male_hired = pr_zero_male_sl*0 + pr_one_male_sl*prob_male_hired(N_M, N_F,B) + pr_two_male_sl*1
-
-#print(np.mean(male_qual_rvs>female_qual_rvs))
-print(pred_prob_male_hired)
+print(total_probability_male_hired(N_M,N_F,B))
 print(dfh['is_male_hired'].mean())
+
+dfb = pd.DataFrame({'b': np.linspace(1,3, 1000)})
+dfb['male'] = dfb['b'].apply(lambda x: total_probability_male_hired(N_M, N_F, x))
+dfb['female'] = 1-dfb['male']
+
+sns.lineplot(x='b', y='Overall probability of being hired', hue='gender',
+             data=dfb.melt('b', value_name="Overall probability of being hired", var_name="gender"))
+sns.despine()
+plt.show()
+
+
